@@ -34,7 +34,17 @@ public class UserController {
     
     @Autowired
     private UserValidator userValidator;
-    
+
+    @GetMapping("/")
+    public String index() {
+        return "welcome";
+    }
+
+    @GetMapping("/error")
+    public String error() {
+        return "error";
+    }
+
     @GetMapping("username")
     @ResponseBody
     public String currentUserName(Authentication authentication) {
