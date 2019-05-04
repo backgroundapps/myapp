@@ -43,9 +43,7 @@ public class UserController {
 
     @GetMapping("/registration")
     public String registration(Model model) {
-        log.info("\n --- reigstration view new user --- \n");
         model.addAttribute("userForm", new User());
-        log.info(" \n --- \n ");
         return "registration";
     }
 
@@ -56,19 +54,12 @@ public class UserController {
 
     @PostMapping("/registration")
     public String registration(@Valid @ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
-        log.info("\n --- reigstration view add user --- \n");
-        log.info(" --- validating ---");
         userValidator.validate(userForm, bindingResult);
         
         if(bindingResult.hasErrors()){
-            log.info(" --- not valid --- ");
-            log.info("Errors: " + bindingResult.getErrorCount() + " obj: " + bindingResult.getObjectName());
-            log.info(String.format("\n ---User > name: %s, pass: %s, confirm: %s --- \n", userForm.getUsername(), userForm.getPassword(), userForm.getPasswordConfirm()));
             return "registration";
         }
-        log.info("--- saving user ---");
         userService.save(userForm);
-        log.info("--- user saved --- ");
         securityService.autoLogin(userForm.getUsername(), userForm.getPassword());
         return "redirect:/welcome";
     }
