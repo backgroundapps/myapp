@@ -37,7 +37,7 @@ public class UserController {
 
     @GetMapping("/")
     public String index() {
-        return "welcome";
+        return "redirect:/welcome";
     }
 
     @GetMapping("/error")
