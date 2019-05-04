@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class GreetingsController {
     @GetMapping("/")
     public String index() {
-        return "index";
+        return "welcome";
     }
 
     @GetMapping("/hello")
